@@ -1,0 +1,35 @@
+{
+  "name": "back-end-task",
+  "version": "1.0.0",
+  "description": "implementation of REST API for user registration and authentication",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/robanb/Backend-Task.git"
+  },
+  "keywords": [
+    "REST",
+    "API",
+    "Registeration",
+    "Authentication",
+    "End-points"
+  ],
+  "author": "Roba Nath Basnet",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/robanb/Backend-Task/issues"
+  },
+  "homepage": "https://github.com/robanb/Backend-Task#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "body-parser": "^1.20.1",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.7.0",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1"
+  }
+}

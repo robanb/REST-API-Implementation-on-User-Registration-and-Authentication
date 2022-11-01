@@ -1,8 +1,7 @@
 ### Backend-Task: `Implementation of REST API for user registration and authentication.`
 ------
 
-| Tables        | Are           | Cool  |
+| ![alt text](https://nodejs.org/static/images/logo.svg)
+        | Are           | Cool  |
 | ------------- |:-------------:| -----:|
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
+

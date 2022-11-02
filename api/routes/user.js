@@ -15,7 +15,7 @@ const storage = multer.diskStorage({
 });
 
 // Filtering the ProfileImage file
-const fileFilter = (req, res, cb) => {
+const fileFilter = (req, file, cb) => {
 	if (file.mimetype === "image/jpeg" || file.mimetype === "image/png") {
 		cb(null, true);
 	} else {

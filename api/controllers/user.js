@@ -16,6 +16,7 @@ exports.user_signup = (req, res, next) => {
 			} else {
 				bcrypt.hash(req.body.password, 10, (err, hash) => {
 					if (err) {
+						console.log(err + "Error Here");
 						return res.status(500).json({
 							error: err,
 						});
@@ -24,11 +25,11 @@ exports.user_signup = (req, res, next) => {
 							_id: new mongoose.Types.ObjectId(),
 							Name: req.body.Name,
 							Email: req.body.Email,
-							BirthDate: req.body.BirthDate,
+							//BirthDate: req.body.BirthDate,
 							ContacNumber: req.body.ContacNumber,
 							Profession: req.body.Profession,
-							Married: req.body.Married,
-							ProfileImage: req.file.path,
+							//Married: req.body.Married,
+							//ProfileImage: req.file.path,
 							Password: hash,
 						});
 						user
@@ -39,6 +40,7 @@ exports.user_signup = (req, res, next) => {
 								});
 							})
 							.catch((err) => {
+								console.log(err + "Error Here");
 								res.status(500).json({
 									error: err,
 								});

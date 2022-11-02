@@ -2,20 +2,20 @@ const mongoose = require("mongoose");
 
 const userSchema = mongoose.Schema({
 	_id: mongoose.Schema.Types.ObjectId,
-	Name: { type: String, required: true },
-	Email: {
+	name: { type: String, required: true },
+	email: {
 		type: String,
 		required: true,
 		unique: true,
 		match:
 			/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/,
 	},
-	//	BirthDate: { type: Date, required: true, format: "%Y-%m-%d" },
-	ContacNumber: { type: Number, required: true },
-	Profession: { type: String },
-	Married: { type: String, required: true },
-	ProfileImage: { type: String, required: true },
-	Password: { type: String, required: true },
+	birthDate: { type: Date, required: true, format: "%Y-%m-%d" },
+	contacNumber: { type: Number, required: true },
+	profession: { type: String },
+	married: { type: String, required: true },
+	profileImage: { type: String, required: true },
+	password: { type: String, required: true },
 });
 
 module.exports = mongoose.model("User", userSchema);

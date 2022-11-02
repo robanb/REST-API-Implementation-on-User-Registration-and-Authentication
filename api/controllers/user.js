@@ -6,7 +6,7 @@ const User = require("../models/user");
 
 // User registeration controller
 exports.user_signup = (req, res, next) => {
-	User.findOne({ Email: req.body.Email })
+	User.findOne({ email: req.body.email })
 		.exec()
 		.then((user) => {
 			if (user) {
@@ -15,23 +15,22 @@ exports.user_signup = (req, res, next) => {
 					message: "User Already Exist!",
 				});
 			} else {
-				bcrypt.hash(req.body.Password, 10, (err, hash) => {
+				bcrypt.hash(req.body.password, 10, (err, hash) => {
 					if (err) {
-						console.log(err + "Error Here");
 						return res.status(500).json({
 							error: err,
 						});
 					} else {
 						const user = new User({
 							_id: new mongoose.Types.ObjectId(),
-							Name: req.body.Name,
-							Email: req.body.Email,
-							BirthDate: req.body.BirthDate,
-							ContacNumber: req.body.ContacNumber,
-							Profession: req.body.Profession,
-							Married: req.body.Married,
-							ProfileImage: req.file.path,
-							Password: hash,
+							name: req.body.name,
+							email: req.body.email,
+							birthDate: req.body.birthDate,
+							contacNumber: req.body.contacNumber,
+							profession: req.body.profession,
+							married: req.body.married,
+							profileImage: req.file.path,
+							password: hash,
 						});
 						user
 							.save()
@@ -41,7 +40,6 @@ exports.user_signup = (req, res, next) => {
 								});
 							})
 							.catch((err) => {
-								console.log(err + "Error Here");
 								res.status(500).json({
 									error: err,
 								});
@@ -54,7 +52,7 @@ exports.user_signup = (req, res, next) => {
 
 // User Authentication Controller
 exports.user_login = (req, res, next) => {
-	User.findOne({ Email: req.body.Email })
+	User.findOne({ email: req.body.email })
 		.exec()
 		.then((user) => {
 			if (!user) {
@@ -63,7 +61,7 @@ exports.user_login = (req, res, next) => {
 					message: "User doesn't exist!",
 				});
 			}
-			bcrypt.compare(req.body.Password, user.Password, (err, result) => {
+			bcrypt.compare(req.body.password, user.password, (err, result) => {
 				if (err) {
 					return res.status(401).json({
 						message: "Authentication failed!",
@@ -72,7 +70,7 @@ exports.user_login = (req, res, next) => {
 				if (result) {
 					const token = jwt.sign(
 						{
-							email: user.Email,
+							email: user.email,
 							userID: user._id,
 						},
 						process.env.JWT_KEY,
@@ -101,7 +99,7 @@ exports.user_login = (req, res, next) => {
 exports.user_details = (req, res, next) => {
 	const id = req.params.userID;
 	User.findById(id)
-		.select("Name Email BirthDate ContacNumber Profession Married ProfileImage")
+		.select("name email birthDate contacNumber profession married profileImage")
 		.exec()
 		.then((doc) => {
 			if (doc) {

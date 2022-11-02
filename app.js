@@ -10,11 +10,20 @@ const UserRoutes = require("./api/routes/user");
 // middleware to log incoming request
 app.use(morgan("dev"));
 
+// making the upload folder static: available to all
+app.use("/uploads", express.static("uploads"));
+
 // parse incoming request with urlencoded payloads
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // extract json data
 app.use(bodyParser.json());
+
+// database Connection
+mongoose.connect("mongodb://localhost:27017/user", {
+	useNewUrlParser: true,
+	useUnifiedTopology: true,
+});
 
 // Adjust the Header payload to prevent CORS(Cross-Origin Resourse Sharing) error
 app.use((req, res, next) => {

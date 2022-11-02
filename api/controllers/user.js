@@ -28,7 +28,7 @@ exports.user_signup = (req, res, next) => {
 							ContacNumber: req.body.ContacNumber,
 							Profession: req.body.Profession,
 							Married: req.body.Married,
-							Image: req.file.path,
+							ProfileImage: req.file.path,
 							Password: hash,
 						});
 						user
@@ -94,8 +94,31 @@ exports.user_login = (req, res, next) => {
 		});
 };
 
-// User Deletion: To allow only the loggedin user to delete his/her account
+// Get individual user's Detail
+exports.user_details = (req, res, next) => {
+	const id = req.params.userID;
+	User.findById(id)
+		.select("Name Email BirthDate ContacNumber Profession Married ProfileImage")
+		.exec()
+		.then((doc) => {
+			if (doc) {
+				res.status(200).json({
+					user: doc,
+				});
+			} else {
+				res.status(404).json({
+					message: "No valid entry found for provided User ID",
+				});
+			}
+		})
+		.catch((err) => {
+			res.status(500).json({
+				error: err,
+			});
+		});
+};
 
+// User Deletion: To allow only the loggedin user to delete his/her account
 exports.user_delete = (req, res, next) => {
 	User.deleteOne({ _id: req.params.userID })
 		.exec()

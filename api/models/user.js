@@ -14,7 +14,7 @@ const userSchema = mongoose.Schema({
 	ContacNumber: { type: Number, required: true },
 	Profession: { type: String },
 	Married: { type: Boolean, required: true },
-	Image: { type: String, required: true },
+	ProfileImage: { type: String, required: true },
 	Password: { type: String, required: true },
 });
 

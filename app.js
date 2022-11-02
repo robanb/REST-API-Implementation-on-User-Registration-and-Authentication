@@ -4,6 +4,9 @@ const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
+// Importing the routes to shorten and use in middleware
+const UserRoutes = require("./api/routes/user");
+
 // middleware to log incoming request
 app.use(morgan("dev"));
 
@@ -31,5 +34,9 @@ app.use((req, res, next) => {
 	}
 	next();
 });
+
+// Setting up middleware
+app.use("/user", UserRoutes);
+
 
 module.exports = app;

@@ -20,3 +20,17 @@
 		</td>
 	</tr>
 </table>
+
+### ⚙️ Tested Using
+
+<table>
+	<tr>
+		<td>
+			<a href="https://www.postman.com/">
+				<img src="https://seeklogo.com/images/P/postman-logo-0087CA0D15-seeklogo.com.png" height="120" width="120" alt="MongoDB"/>
+			</a>
+		</td>
+	</tr>
+</table>
+
+# <a href="https://documenter.getpostman.com/view/24142763/2s8YRpEqn7#5dd42510-eb38-42af-b2d6-2ca9ee3aa884">`View API Documentation`</a>

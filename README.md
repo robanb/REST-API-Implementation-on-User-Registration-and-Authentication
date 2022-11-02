@@ -20,3 +20,14 @@
 		</td>
 	</tr>
 </table>
+
+<table>
+	<tr>
+		<td>
+			<a href="https://seeklogo.com/images/P/postman-logo-0087CA0D15-seeklogo.com.png" height="120" width="150" alt="Postman"/> </a>
+		</td>
+		<td>
+			<a href="https://documenter.getpostman.com/view/24142763/2s8YRpEqn7#5dd42510-eb38-42af-b2d6-2ca9ee3aa884">View API Documentation</a>
+		</td>
+	</tr>
+</table>

@@ -1,3 +1,4 @@
+require("dotenv").config();
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
@@ -14,7 +15,7 @@ exports.user_signup = (req, res, next) => {
 					message: "User Already Exist!",
 				});
 			} else {
-				bcrypt.hash(req.body.password, 10, (err, hash) => {
+				bcrypt.hash(req.body.Password, 10, (err, hash) => {
 					if (err) {
 						console.log(err + "Error Here");
 						return res.status(500).json({
@@ -25,11 +26,11 @@ exports.user_signup = (req, res, next) => {
 							_id: new mongoose.Types.ObjectId(),
 							Name: req.body.Name,
 							Email: req.body.Email,
-							//BirthDate: req.body.BirthDate,
+							BirthDate: req.body.BirthDate,
 							ContacNumber: req.body.ContacNumber,
 							Profession: req.body.Profession,
-							//Married: req.body.Married,
-							//ProfileImage: req.file.path,
+							Married: req.body.Married,
+							ProfileImage: req.file.path,
 							Password: hash,
 						});
 						user
@@ -74,7 +75,7 @@ exports.user_login = (req, res, next) => {
 							email: user.Email,
 							userID: user._id,
 						},
-						process.env.JWY_KEY,
+						process.env.JWT_KEY,
 						{
 							expiresIn: "1h",
 						}

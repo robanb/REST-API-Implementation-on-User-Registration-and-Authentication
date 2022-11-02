@@ -13,8 +13,8 @@ const userSchema = mongoose.Schema({
 	//	BirthDate: { type: Date, required: true, format: "%Y-%m-%d" },
 	ContacNumber: { type: Number, required: true },
 	Profession: { type: String },
-	//	Married: { type: Boolean, required: true },
-	//	ProfileImage: { type: String, required: true },
+	Married: { type: String, required: true },
+	ProfileImage: { type: String, required: true },
 	Password: { type: String, required: true },
 });
 

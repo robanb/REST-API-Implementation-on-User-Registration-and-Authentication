@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const multer = require("multer");
 const UserController = require("../controllers/user");
-const checkAuth = require("../middleware/check-auth");
+const checkToken = require("../middleware/check-auth");
 
 // ProfileImage Storage
 const storage = multer.diskStorage({
@@ -42,10 +42,13 @@ router.post(
 // User Authentication Route
 router.post("/login", UserController.user_login);
 
-// Get User's Details
-router.get("/:userID", checkAuth, UserController.user_details);
+// Get User's Details: Allow only the loggedin user ro get his/her details
+router.get("/:userID", checkToken, UserController.user_details);
 
-// User Deletion Route
-router.delete("/:userID", checkAuth, UserController.user_delete);
+// Update User's Details: Allow only the loggedin user ro Edit his/her details
+router.patch("/:userID", checkToken, UserController.update_user);
+
+// User Deletion Route: allow only the loggedin user to delete his/her account
+router.delete("/:userID", checkToken, UserController.user_delete);
 
 module.exports = router;

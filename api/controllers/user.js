@@ -1,8 +1,8 @@
 require("dotenv").config();
-const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
+const checkToken = require("../middleware/check-auth");
 
 // User registeration controller
 exports.user_signup = (req, res, next) => {
@@ -22,28 +22,27 @@ exports.user_signup = (req, res, next) => {
 						});
 					} else {
 						const user = new User({
-							_id: new mongoose.Types.ObjectId(),
 							name: req.body.name,
 							email: req.body.email,
 							birthDate: req.body.birthDate,
-							contacNumber: req.body.contacNumber,
 							profession: req.body.profession,
-							married: req.body.married,
 							profileImage: req.file.path,
 							password: hash,
 						});
-						user
-							.save()
-							.then((result) => {
-								res.status(201).json({
-									message: "User Registeration Successful!",
-								});
-							})
-							.catch((err) => {
+						user.save((err, data) => {
+							if (err) {
 								res.status(500).json({
 									error: err,
 								});
-							});
+							} else {
+								return (
+									data,
+									res.status(201).json({
+										message: "User Registration Successful",
+									})
+								);
+							}
+						});
 					}
 				});
 			}
@@ -51,7 +50,7 @@ exports.user_signup = (req, res, next) => {
 };
 
 // User Authentication Controller
-exports.user_login = (req, res, next) => {
+exports.user_login = (req, res) => {
 	User.findOne({ email: req.body.email })
 		.exec()
 		.then((user) => {
@@ -64,7 +63,7 @@ exports.user_login = (req, res, next) => {
 			bcrypt.compare(req.body.password, user.password, (err, result) => {
 				if (err) {
 					return res.status(401).json({
-						message: "Authentication failed!",
+						message: "Password Didn't Match !",
 					});
 				}
 				if (result) {
@@ -96,41 +95,99 @@ exports.user_login = (req, res, next) => {
 };
 
 // Get individual user's Detail
-exports.user_details = (req, res, next) => {
+exports.user_details = (req, res) => {
 	const id = req.params.userID;
-	User.findById(id)
-		.select("name email birthDate contacNumber profession married profileImage")
-		.exec()
-		.then((doc) => {
-			if (doc) {
-				res.status(200).json({
-					user: doc,
+	const userID = req.userData.userID.toString();
+	if (userID != id) {
+		return res
+			.status(403)
+			.json({ message: "Forbidded, You must be a valid user !" });
+	}
+	if (checkToken) {
+		User.findById(id)
+			.exec()
+			.then((doc) => {
+				if (doc) {
+					res.status(200).json({
+						user: doc,
+					});
+				} else {
+					res.status(404).json({
+						message: "No valid entry found for this user!",
+					});
+				}
+			})
+			.catch((err) => {
+				res.status(500).json({
+					error: err,
 				});
-			} else {
-				res.status(404).json({
-					message: "No valid entry found for provided User ID",
-				});
-			}
-		})
-		.catch((err) => {
-			res.status(500).json({
-				error: err,
 			});
+	} else {
+		res.status(401).json({
+			message: "You must be logged in to access you details!",
 		});
+	}
 };
 
-// User Deletion: To allow only the loggedin user to delete his/her account
-exports.user_delete = (req, res, next) => {
-	User.deleteOne({ _id: req.params.userID })
-		.exec()
-		.then((result) => {
-			res.status(200).json({
-				message: "User Deletion Successful",
-			});
-		})
-		.catch((err) => {
-			res.status(500).json({
-				error: err,
+// Update User's Detail
+exports.update_user = (req, res) => {
+	const id = req.params.userID;
+	const userID = req.userData.userID.toString();
+	if (userID != id) {
+		return res
+			.status(403)
+			.json({ message: "Forbidded, You must be a valid user !" });
+	}
+	if (checkToken) {
+		bcrypt.hash(req.body.password, 10, (err, hash) => {
+			let id = req.params.userID;
+			let data = {
+				name: req.body.name,
+				email: req.body.email,
+				birthDate: req.body.birthDate,
+				profession: req.body.birthDate,
+				password: hash,
+			};
+			User.findByIdAndUpdate(id, data, function (err, result) {
+				if (!err) {
+					res.status(404).json({
+						message: "User Updated Sucessfully",
+					});
+				} else {
+					res.status(500).json({
+						error: err,
+					});
+				}
 			});
 		});
+	}
+};
+
+// User Deletion controller
+exports.user_delete = (req, res) => {
+	const id = req.params.userID;
+	const userID = req.userData.userID.toString();
+	if (userID != id) {
+		return res
+			.status(403)
+			.json({ message: "Forbidded, You must be a valid user !" });
+	}
+	if (checkToken) {
+		User.deleteOne({ _id: id })
+			.exec()
+			.then((result) => {
+				res.status(200).json({
+					message: "User Deletion Successful",
+				});
+			})
+			.catch((err) => {
+				res.status(500).json({
+					error: err,
+				});
+			});
+	} else {
+		res.status(401).json({
+			message: "You must be logged in to delete you Account !",
+		});
+	}
 };

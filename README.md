@@ -46,12 +46,12 @@
 		</td>
 		<td>
 			<a href="https://tailwindcss.com/">
-				<img src="https://d6f6d0kpz0gyr.cloudfront.net/uploads/images/_1200x630_crop_center-center_82_none/tailwind-thumb.jpg?mtime=20210104144959&focal=none&tmtime=20210104145035" height="120" width="150" alt="TailwindCSS"/>
+				<img src="https://d6f6d0kpz0gyr.cloudfront.net/uploads/images/_1200x630_crop_center-center_82_none/tailwind-thumb.jpg?mtime=20210104144959&focal=none&tmtime=20210104145035" height="120" width="160" alt="TailwindCSS"/>
 			</a>
 		</td>
 		<td>
 			<a href="https://axios-http.com/">
-				<img src="https://axios-http.com/assets/logo.svg" height="120" width="150" alt="Axios"/>
+				<img src="https://axios-http.com/assets/logo.svg" height="120" width="160" alt="Axios"/>
 			</a>
 		</td>
 	</tr>

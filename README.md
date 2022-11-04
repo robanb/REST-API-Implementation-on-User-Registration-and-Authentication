@@ -1,4 +1,15 @@
 ### Backend-Task: `Implementation of REST API for User Registration and Authentication.`
+### ⚙️ Tested Using
+
+<table>
+	<tr>
+		<td>
+			<a href="https://www.postman.com/">
+				<img src="https://seeklogo.com/images/P/postman-logo-0087CA0D15-seeklogo.com.png" height="120" width="120" alt="MongoDB"/>
+			</a>
+		</td>
+	</tr>
+</table>
 
 ### 🛠️ Backend Built Using
 
@@ -22,17 +33,6 @@
 	</tr>
 </table>
 
-### ⚙️ Tested Using
-
-<table>
-	<tr>
-		<td>
-			<a href="https://www.postman.com/">
-				<img src="https://seeklogo.com/images/P/postman-logo-0087CA0D15-seeklogo.com.png" height="120" width="120" alt="MongoDB"/>
-			</a>
-		</td>
-	</tr>
-</table>
 
 
 ### 🛠️ Frontend Built Using

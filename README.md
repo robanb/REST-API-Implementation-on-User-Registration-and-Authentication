@@ -1,4 +1,4 @@
-### Backend-Task: `Implementation of REST API for user registration and authentication.`
+### Backend-Task: `Implementation of REST API for User Registration and Authentication.`
 
 ### 🛠️ Built Using
 

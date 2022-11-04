@@ -1,4 +1,4 @@
-### Task: `Implementation of REST API for User Registration and Authentication.`
+## Task: `Implementation of REST API for User Registration and Authentication.`
 ### ⚙️ Tested Using
 
 <table>

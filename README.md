@@ -41,12 +41,12 @@
 	<tr>
 		<td>
 			<a href="https://reactjs.org/">
-				<img src="https://th.bing.com/th/id/R.30652b3f156850b09309a262ee2f1c4a?rik=2INO0haBgnFnJA&pid=ImgRaw&r=0&sres=1&sresct=1" height="120" width="150" alt="React.js"/>
+				<img src="https://th.bing.com/th/id/R.30652b3f156850b09309a262ee2f1c4a?rik=2INO0haBgnFnJA&pid=ImgRaw&r=0&sres=1&sresct=1" height="120" width="170" alt="React.js"/>
 			</a>
 		</td>
 		<td>
 			<a href="https://tailwindcss.com/">
-				<img src="https://d6f6d0kpz0gyr.cloudfront.net/uploads/images/_1200x630_crop_center-center_82_none/tailwind-thumb.jpg?mtime=20210104144959&focal=none&tmtime=20210104145035" height="120" width="160" alt="TailwindCSS"/>
+				<img src="https://d6f6d0kpz0gyr.cloudfront.net/uploads/images/_1200x630_crop_center-center_82_none/tailwind-thumb.jpg?mtime=20210104144959&focal=none&tmtime=20210104145035" height="120" width="170" alt="TailwindCSS"/>
 			</a>
 		</td>
 		<td>

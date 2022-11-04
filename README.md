@@ -1,6 +1,6 @@
 ### Backend-Task: `Implementation of REST API for User Registration and Authentication.`
 
-### 🛠️ Built Using
+### 🛠️ Backend Built Using
 
 <table>
 	<tr>
@@ -29,6 +29,29 @@
 		<td>
 			<a href="https://www.postman.com/">
 				<img src="https://seeklogo.com/images/P/postman-logo-0087CA0D15-seeklogo.com.png" height="120" width="120" alt="MongoDB"/>
+			</a>
+		</td>
+	</tr>
+</table>
+
+
+### 🛠️ Frontend Built Using
+
+<table>
+	<tr>
+		<td>
+			<a href="https://reactjs.org/">
+				<img src="https://th.bing.com/th/id/R.30652b3f156850b09309a262ee2f1c4a?rik=2INO0haBgnFnJA&pid=ImgRaw&r=0&sres=1&sresct=1" height="120" width="120" alt="React.js"/>
+			</a>
+		</td>
+		<td>
+			<a href="https://expressjs.com/">
+				<img src="https://i.pinimg.com/564x/93/50/32/9350328b535785d9fb937c02802ec1a1.jpg" height="120" width="150" alt="Express.js"/>
+			</a>
+		</td>
+		<td>
+			<a href="https://www.mongodb.com/">
+				<img src="https://i.pinimg.com/564x/7e/ea/54/7eea54df0dd614c399c2288ffc5bcbd4.jpg" height="120" width="150" alt="MongoDB"/>
 			</a>
 		</td>
 	</tr>

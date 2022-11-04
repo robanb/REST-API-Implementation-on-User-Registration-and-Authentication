@@ -5,7 +5,7 @@ const User = require("../models/user");
 const checkToken = require("../middleware/check-auth");
 
 // User registeration controller
-exports.user_signup = (req, res, next) => {
+exports.user_signup = (req, res) => {
 	User.findOne({ email: req.body.email })
 		.exec()
 		.then((user) => {
@@ -63,7 +63,7 @@ exports.user_login = (req, res) => {
 			bcrypt.compare(req.body.password, user.password, (err, result) => {
 				if (err) {
 					return res.status(401).json({
-						message: "Password Didn't Match !",
+						message: "Authentication failed!",
 					});
 				}
 				if (result) {
@@ -83,7 +83,7 @@ exports.user_login = (req, res) => {
 					});
 				}
 				return res.status(401).json({
-					message: "Authentication failed!",
+					message: "Password Didn't Match !",
 				});
 			});
 		})
@@ -105,15 +105,12 @@ exports.user_details = (req, res) => {
 	}
 	if (checkToken) {
 		User.findById(id)
+			.select(" _id name email birthDate profession profileImage")
 			.exec()
 			.then((doc) => {
 				if (doc) {
 					res.status(200).json({
 						user: doc,
-					});
-				} else {
-					res.status(404).json({
-						message: "No valid entry found for this user!",
 					});
 				}
 			})
@@ -122,10 +119,6 @@ exports.user_details = (req, res) => {
 					error: err,
 				});
 			});
-	} else {
-		res.status(401).json({
-			message: "You must be logged in to access you details!",
-		});
 	}
 };
 
@@ -140,25 +133,31 @@ exports.update_user = (req, res) => {
 	}
 	if (checkToken) {
 		bcrypt.hash(req.body.password, 10, (err, hash) => {
-			let id = req.params.userID;
-			let data = {
-				name: req.body.name,
-				email: req.body.email,
-				birthDate: req.body.birthDate,
-				profession: req.body.birthDate,
-				password: hash,
-			};
-			User.findByIdAndUpdate(id, data, function (err, result) {
-				if (!err) {
-					res.status(404).json({
-						message: "User Updated Sucessfully",
-					});
-				} else {
-					res.status(500).json({
-						error: err,
-					});
-				}
-			});
+			if (err) {
+				return res.status(500).json({
+					error: err,
+				});
+			} else {
+				let id = req.params.userID;
+				let data = {
+					name: req.body.name,
+					email: req.body.email,
+					birthDate: req.body.birthDate,
+					profession: req.body.profession,
+					password: hash,
+				};
+				User.findByIdAndUpdate(id, data, function (err) {
+					if (!err) {
+						res.status(404).json({
+							message: "User Updated Sucessfully",
+						});
+					} else {
+						res.status(500).json({
+							error: err,
+						});
+					}
+				});
+			}
 		});
 	}
 };

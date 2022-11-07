@@ -43,7 +43,7 @@ router.post(
 router.post("/login", UserController.user_login);
 
 // Get User's Details: Allow only the loggedin user ro get his/her details
-router.get("/:userID", checkToken, UserController.user_details);
+router.get("/:email", checkToken, UserController.user_details);
 
 // Update User's Details: Allow only the loggedin user ro Edit his/her details
 router.patch("/:userID", checkToken, UserController.update_user);

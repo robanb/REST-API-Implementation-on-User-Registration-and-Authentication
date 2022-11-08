@@ -96,15 +96,16 @@ exports.user_login = (req, res) => {
 
 // Get individual user's Detail
 exports.user_details = (req, res) => {
-	const id = req.params.userID;
-	const userID = req.userData.userID.toString();
-	if (userID != id) {
+	const email = req.params.email;
+	const userEmail = req.userData.email.toString();
+	console.log(userEmail);
+	if (email != userEmail) {
 		return res
 			.status(403)
 			.json({ message: "Forbidded, You must be a valid user !" });
 	}
 	if (checkToken) {
-		User.findById(id)
+		User.find({ email: email })
 			.select(" _id name email birthDate profession profileImage")
 			.exec()
 			.then((doc) => {

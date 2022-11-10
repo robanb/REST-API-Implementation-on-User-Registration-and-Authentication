@@ -1,7 +1,9 @@
-import "./App.css";
-
+import { Routes, Route, useRoutes, BrowserRouter } from "react-router-dom";
+import { useState } from "react";
+import React from "react";
+import Navigation from "./components/Navigation";
 function App() {
-	return <div className="App">Coming soon!</div>;
+	return <Navigation />;
 }
 
 export default App;

@@ -29,7 +29,7 @@ export default function Navigation() {
 									<button className="h-10 w-50 cursor-pointer rounded-full font-poppins px-5 py-1 bg-orange-400 bg-opacity-100 hover:animate-bounce drop-shadow-5xl ">
 										PROFILE
 									</button>
-							</a>
+								</a>
 							</li>
 							<li className="pr-5">
 								<a>

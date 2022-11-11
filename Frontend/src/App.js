@@ -1,3 +1,4 @@
+import React from "react";
 import { Routes, Route, useRoutes, BrowserRouter } from "react-router-dom";
 import { AuthContextProvider } from "./store/auth-context";
 import routes from "./routes";

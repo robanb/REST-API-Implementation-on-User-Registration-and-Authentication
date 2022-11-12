@@ -1,6 +1,5 @@
 import React from "react";
 import * as Flowbite from "flowbite-react";
-import { Link } from "react-router-dom";
 
 export default function Footer() {
 	return (

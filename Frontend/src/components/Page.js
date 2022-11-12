@@ -12,7 +12,7 @@ export default function Page() {
 			<div className="h-35-r w-35-r bg-gradient-to-r  from-purple-400 via-orange-500 to-red-500 rounded-full absolute top-96 -left-20 transform rotate-180 animate-pulse brightness-50	"></div>
 			<div className="h-screen w-screen bg-opacity-0 backdrop-blur-sm ">
 				<Navigation />
-				{/* <ProfilePage /> */}
+				
 			</div>
 		</div>
 	);

@@ -1,14 +1,10 @@
 import React from "react";
 import { Formik } from "formik";
-import logo from "../../assets/logo.png";
-import Tilt from "react-parallax-tilt";
 import { Link, useNavigate } from "react-router-dom";
 import useScriptRef from "../../hooks/useScriptRef";
 import * as Yup from "yup";
 import * as Flowbite from "flowbite-react";
-
 import { registration } from "../../accessApi/userApi";
-
 export default function Register() {
 	const scriptedRef = useScriptRef();
 	const navigate = useNavigate();

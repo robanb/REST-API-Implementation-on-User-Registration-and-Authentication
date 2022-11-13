@@ -23,11 +23,9 @@ export default function Navigation() {
 					arrowIcon={false}
 					inline={true}
 					label={
-						<Flowbite.Avatar
-							alt="User"
-							img="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-							rounded={true}
-						/>
+						<Flowbite.Button outline={true} gradientDuoTone="purpleToBlue">
+							Account
+						</Flowbite.Button>
 					}
 				>
 					<Flowbite.Dropdown.Header>

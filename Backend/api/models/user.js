@@ -9,7 +9,6 @@ const userSchema = mongoose.Schema({
 	},
 	birthDate: { type: Date, required: true, format: "%m-%d-%y" },
 	profession: { type: String },
-	profileImage: { type: String, required: true },
 	password: { type: String, required: true },
 });
 

@@ -20,8 +20,13 @@ export default function OldLogin({ ...others }) {
 		login(crediential).then((response) => {
 			if (!response.status === 200) throw new Error(response.status);
 			else {
-				setAuth(response["data"].access_token);
+				// setAuth(response.data.token);
+				//setAuth
+				
+				
+
 				navigate("/");
+				console.log(setAuth);
 			}
 		});
 	};

@@ -26,9 +26,9 @@ exports.user_signup = (req, res) => {
 							email: req.body.email,
 							birthDate: req.body.birthDate,
 							profession: req.body.profession,
-							profileImage: req.file.path,
 							password: hash,
 						});
+
 						user.save((err, data) => {
 							if (err) {
 								res.status(500).json({

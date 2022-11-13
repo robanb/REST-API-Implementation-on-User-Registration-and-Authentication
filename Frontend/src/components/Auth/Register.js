@@ -21,7 +21,7 @@ export default function Register() {
 		registration(formdata).then((response) => {
 			if (!response.status === 200) throw new Error(response.status);
 			else {
-				navigate("/auth");
+				navigate("/login");
 			}
 		});
 	};
@@ -36,7 +36,6 @@ export default function Register() {
 								email: "",
 								birthDate: "",
 								profession: "",
-								profileImage: "",
 								password: "",
 								submit: null,
 							}}
@@ -46,7 +45,7 @@ export default function Register() {
 									.email("Must be a valid email")
 									.max(255)
 									.required("Email is required"),
-								birthDate: Yup.string().max(15).required("DOB is required"),
+								birthDate: Yup.string().required("DOB is required"),
 								profession: Yup.string().required("profession is required"),
 
 								password: Yup.string()
@@ -90,7 +89,6 @@ export default function Register() {
 									onSubmit={handleSubmit}
 								>
 									<div className="flex flex-col gap-4 text-black items-center font-bold">
-										{" "}
 										User Registration
 									</div>
 									<div>
@@ -105,11 +103,7 @@ export default function Register() {
 											onChange={handleChange}
 										/>
 										{touched.name && errors.name && (
-											<p
-												error
-												id="standard-weight-helper-text-user_id-login"
-												className="text-red-900"
-											>
+											<p error className="text-red-900">
 												{errors.name}
 											</p>
 										)}
@@ -126,11 +120,7 @@ export default function Register() {
 											onChange={handleChange}
 										/>
 										{touched.email && errors.email && (
-											<p
-												error
-												id="standard-weight-helper-text-user_id-login"
-												className="text-red-900"
-											>
+											<p error className="text-red-900">
 												{errors.email}
 											</p>
 										)}
@@ -146,11 +136,7 @@ export default function Register() {
 											onChange={handleChange}
 										/>
 										{touched.birthDate && errors.birthDate && (
-											<p
-												error
-												id="standard-weight-helper-text-user_id-login"
-												className="text-red-900"
-											>
+											<p error className="text-red-900">
 												{errors.birthDate}
 											</p>
 										)}
@@ -167,35 +153,12 @@ export default function Register() {
 											onChange={handleChange}
 										/>
 										{touched.profession && errors.profession && (
-											<p
-												error
-												id="standard-weight-helper-text-user_id-login"
-												className="text-red-900"
-											>
+											<p error className="text-red-900">
 												{errors.profession}
 											</p>
 										)}
 									</div>
-									<div>
-										<div className=" block">
-											<Flowbite.Label htmlFor="pimage" value="Profile Image" />
-										</div>
-										<Flowbite.FileInput
-											type="file"
-											name="profileImage"
-											onBlur={handleBlur}
-											onChange={handleChange}
-										/>
-										{touched.profileImage && errors.profileImage && (
-											<p
-												error
-												id="standard-weight-helper-text-user_id-login"
-												className="text-red-900"
-											>
-												{errors.profileImage}
-											</p>
-										)}
-									</div>
+
 									<div>
 										<div className=" block">
 											<Flowbite.Label htmlFor="password" value="Password" />
@@ -208,11 +171,7 @@ export default function Register() {
 											onChange={handleChange}
 										/>
 										{touched.password && errors.password && (
-											<p
-												error
-												id="standard-weight-helper-text-user_id-login"
-												className="text-red-900"
-											>
+											<p error className="text-red-900">
 												{errors.password}
 											</p>
 										)}

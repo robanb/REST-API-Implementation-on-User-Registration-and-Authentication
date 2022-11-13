@@ -30,20 +30,22 @@ const setSession = (accessToken) => {
 	}
 };
 
-export const AuthContextProvider = (props) => {
+export const AuthContextProvider = ({ children }) => {
 	const navigate = useNavigate();
-	const [token, setToken] = useState({});
+	const [token, setAuth] = useState();
 	const userIsLoggedIn = !!token;
+
 	if (Object.keys(token).length !== 0) {
 		setSession(token);
 	}
 
 	const loginHandler = (token) => {
-		setToken(token);
+		setAuth(token);
+		setSession(token);
 	};
 
 	const logoutHadler = () => {
-		setToken(null);
+		setAuth(null);
 	};
 
 	const contextValue = {
@@ -53,28 +55,24 @@ export const AuthContextProvider = (props) => {
 		logout: logoutHadler,
 	};
 
-	// useEffect(() => {
-	// 	(async () => {
-	// 	  try {
-	// 		const accessToken = window.localStorage.getItem('accessToken');
+	useEffect(() => {
+		(async () => {
+			try {
+				const accessToken = window.localStorage.getItem("accessToken");
 
-	// 		if (accessToken && isValidToken(accessToken)) {
-	// 			navigate('/')
-
-	// 		}else{
-	// 			navigate('/auth')
-	// 		}
-
-	// 	  } catch (err) {
-	// 		navigate('/auth')
-	// 	  }
-	// 	})();
-	//   }, []);
+				if (accessToken && isValidToken(accessToken)) {
+					navigate("/home");
+				} else {
+					navigate("/login");
+				}
+			} catch (err) {
+				navigate("/login");
+			}
+		})();
+	}, []);
 
 	return (
-		<AuthContext.Provider value={contextValue}>
-			{props.children}
-		</AuthContext.Provider>
+		<AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
 	);
 };
 

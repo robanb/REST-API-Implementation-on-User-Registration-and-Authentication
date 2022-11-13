@@ -1,18 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import image from "../assets/Roba.png";
 import Navigation from "./Navigation";
 import * as Flowbite from "flowbite-react";
-import * as Flobites from "flowbite";
+// import * as Flobites from "flowbite";
 import { Formik } from "formik";
 import { Link, useNavigate } from "react-router-dom";
 import useScriptRef from "../hooks/useScriptRef";
 import * as Yup from "yup";
-// import Footer from "./Footer";
 import { listData } from "../accessApi/userApi";
 
 export default function ProfilePage() {
+	const [showEditModal, setEditModal] = React.useState(false);
+	const [showDeleteModal, setDeleteModal] = React.useState(false);
+	const [userData, setUserData] = useState();
+
 	const scriptedRef = useScriptRef();
 	const navigate = useNavigate();
+	useEffect(() => {
+		listData().then((response) => {
+			if (!response.status === 200) throw new Error(response.status);
+			else {
+				setUserData(response.data);
+			}
+		});
+	}, []);
 
 	return (
 		<div className="bg-gray-800 h-screen w-screen relative overflow-hidden flex justify-center items-center ">
@@ -25,14 +36,9 @@ export default function ProfilePage() {
 						<div className="max-w-sm">
 							<Flowbite.Card>
 								<div className="flex flex-col items-center pb-5">
-									<img
-										className="mb-3 h-24 w-24 rounded-full shadow-lg"
-										src="https://flowbite.com/docs/images/people/profile-picture-3.jpg"
-										alt="Profile"
-									/>
-									<h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">
+									<h1 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">
 										Bonnie Green
-									</h5>
+									</h1>
 									<span className="text-sm text-gray-500 dark:text-gray-400">
 										Profession: Visual Designer
 									</span>
@@ -42,54 +48,44 @@ export default function ProfilePage() {
 									<span className="text-sm text-gray-500 dark:text-gray-400">
 										Date of Birth: 12/23/1999
 									</span>
-									<div className="mt-4 flex space-x-3 lg:mt-6">
-										<Flowbite.Button color="success">Edit</Flowbite.Button>
-										{/* Modal */}
-										{/* <Flobites.React.Fragment>
-											<Flobites.Button
-												color="failure"
-												////  onClick={onClick}
-											>
-												Delete
-											</Flobites.Button>
-											<Flowbite.Modal
-												show={false}
-												size="md"
-												popup={true}
-												//// onClose={onClose}
-											>
-												<Flowbite.Modal.Header />
-												<Flowbite.Modal.Body>
-													<div className="text-center">
-														////
-														{/* <Flowbites.HiOutlineExclamationCircle className="mx-auto mb-4 h-14 w-14 text-gray-400 dark:text-gray-200" /> */}
-										{/* <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-															Are you sure you want to delete your Account?
-														</h3>
-														<div className="flex justify-center gap-4">
-															<Flowbite.Button
-																color="failure"
-																//// onClick={onClick}
-															>
-																Yes, I'm sure
-															</Flowbite.Button>
-															<Flowbite.Button
-																color="gray"
-																//// onClick={onClick}
-															>
-																No, cancel
-															</Flowbite.Button> */}
-										{/* </div>
-													</div>
-												</Flowbite.Modal.Body>
-											</Flowbite.Modal>
-										</Flobites.React.Fragment> */}
-									</div>
+									<div className="mt-4 flex space-x-3 lg:mt-6"></div>
 								</div>
 							</Flowbite.Card>
 						</div>
 					</div>
 				</div>
+				{showDeleteModal ? (
+					<div className="w-full justify-center items-center flex overflow-x-hidden fixed inset-0 z-50 outline-none focus:outline-none scroll-auto overflow-y-auto">
+						<div className=" h-100 w-96 bg-opacity-60 bg-gray-900 rounded-2xl shadow-5xl hover:shadow-violet-900 mt-16">
+							<Flowbite.Card>
+								<div className="flex flex-col gap-4">
+									<div className="flex flex-col gap-4 text-black items-center font-bold">
+										Are you sure you want to delete your account?
+									</div>
+									<div className="mt-4 flex space-x-3 lg:mt-6 items-center">
+										<Flowbite.Button
+											color="success"
+											type="submit"
+											value="yes"
+											onClick={() => showEditModal(false)}
+										>
+											Yes
+										</Flowbite.Button>
+										<Flowbite.Button
+											color="dark"
+											type="button"
+											value="no"
+											onClick={() => showEditModal(false)}
+										>
+											No
+										</Flowbite.Button>
+									</div>
+								</div>
+							</Flowbite.Card>
+						</div>
+					</div>
+				) : null}
+
 				{/* <Footer /> */}
 			</div>
 		</div>

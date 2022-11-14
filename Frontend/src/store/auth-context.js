@@ -32,9 +32,8 @@ const setSession = (accessToken) => {
 
 export const AuthContextProvider = ({ children }) => {
 	const navigate = useNavigate();
-	const [token, setAuth] = useState();
+	const [token, setAuth] = useState({});
 	const userIsLoggedIn = !!token;
-
 	if (Object.keys(token).length !== 0) {
 		setSession(token);
 	}
@@ -61,7 +60,7 @@ export const AuthContextProvider = ({ children }) => {
 				const accessToken = window.localStorage.getItem("accessToken");
 
 				if (accessToken && isValidToken(accessToken)) {
-					navigate("/home");
+					navigate("/");
 				} else {
 					navigate("/login");
 				}
@@ -72,7 +71,9 @@ export const AuthContextProvider = ({ children }) => {
 	}, []);
 
 	return (
-		<AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
+		<AuthContext.Provider value={{ token, setAuth }}>
+			{children}
+		</AuthContext.Provider>
 	);
 };
 

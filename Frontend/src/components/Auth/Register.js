@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Formik } from "formik";
 import { Link, useNavigate } from "react-router-dom";
 import useScriptRef from "../../hooks/useScriptRef";
@@ -8,7 +8,7 @@ import { registration } from "../../accessApi/userApi";
 export default function Register() {
 	const scriptedRef = useScriptRef();
 	const navigate = useNavigate();
-
+	const [error, setError] = useState();
 	const registers = (userData) => {
 		const formdata = new FormData();
 		formdata.append("name", userData.name);
@@ -19,11 +19,17 @@ export default function Register() {
 		formdata.append("profileImage", userData.profileImage);
 
 		registration(formdata).then((response) => {
-			if (!response.status === 200) throw new Error(response.status);
+			if (!response.status === 200) {
+				throw new Error(response.status);
+			}
+			//  else if (response.status === 200) {
+			// 	const response = response.data;
+			// }
 			else {
 				navigate("/login");
 			}
-		});
+		},error=>{
+			setError(error.response.data.message)});
 	};
 	return (
 		<div className="h-screen w-screen overflow-hidden flex justify-center items-center from-gray-800 via-teal-900 to-gray-800 bg-gradient-to-r scroll-auto overflow-y-auto">
@@ -88,6 +94,7 @@ export default function Register() {
 									noValidate
 									onSubmit={handleSubmit}
 								>
+									<p >{error}</p>
 									<div className="flex flex-col gap-4 text-black items-center font-bold">
 										User Registration
 									</div>

@@ -1,9 +1,15 @@
 import React from "react";
 import logo from "../assets/logo.png";
 import * as Flowbite from "flowbite-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-export default function Navigation() {
+export default function Navigation(props) {
+	console.log(props)
+	const navigate = useNavigate();
+	const logout = ()=>{
+		localStorage.removeItem("accessToken");
+		navigate('/login');
+	}
 	return (
 		<Flowbite.Navbar fluid={true} rounded={false} className="bg-opacity-70">
 			<Link to={"/"}>
@@ -28,12 +34,6 @@ export default function Navigation() {
 						</Flowbite.Button>
 					}
 				>
-					<Flowbite.Dropdown.Header>
-						<span className="block text-sm">Bonnie Green</span>
-						<span className="block truncate text-sm font-medium">
-							name@flowbite.com
-						</span>
-					</Flowbite.Dropdown.Header>
 					<Link to={`/profile`}>
 						<Flowbite.Dropdown.Item>Profile</Flowbite.Dropdown.Item>
 					</Link>
@@ -43,9 +43,9 @@ export default function Navigation() {
 					<Link to={``}>
 						<Flowbite.Dropdown.Item>Earnings</Flowbite.Dropdown.Item>
 					</Link>
-					<Link to={``}>
+					<div onClick={logout}>
 						<Flowbite.Dropdown.Item>Sign out</Flowbite.Dropdown.Item>
-					</Link>
+					</div>
 				</Flowbite.Dropdown>
 				<Flowbite.Navbar.Toggle />
 			</div>

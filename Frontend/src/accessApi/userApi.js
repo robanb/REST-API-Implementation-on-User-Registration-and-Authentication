@@ -24,34 +24,37 @@ const registration = async (formData) => {
 };
 
 //Listing user Profile details
-const listData = async ({ email }) => {
-	return await axios.get(`${Config.API_KEY}`, email, {
+const listData = async ( email ) => {
+	return await axios.get(`${Config.API_KEY}/`+ email, {
 		headers: {
 			"Content-Type": "application/json",
 			"Access-Control-Allow-Origin": "*",
 			"Access-Control-Allow-Methods": "GET",
+			"Authorization": `Bearer ${localStorage.getItem("accessToken")}`,
 		},
 	});
 };
 
 // Update user Profile details
 const updateData = async ({ ...formData }) => {
-	return await axios.patch(`${Config.API_KEY}`, formData, {
+	return await axios.patch(`${Config.API_KEY}/`+formData._id, formData, {
 		headers: {
-			"Content-Type": "multipart/form-data",
+			"Content-Type": "application/json",
 			"Access-Control-Allow-Origin": "*",
 			"Access-Control-Allow-Methods": "PATCH",
+			"Authorization": `Bearer ${localStorage.getItem("accessToken")}`,
 		},
 	});
 };
 
 // Delete user
-const deleteData = async ({ id }) => {
-	return await axios.delete(`${Config.API_KEY}`, id, {
+const deleteData = async ( id ) => {
+	return await axios.delete(`${Config.API_KEY}/`+id, {
 		headers: {
 			"Content-Type": "application/json",
 			"Access-Control-Allow-Origin": "*",
 			"Access-Control-Allow-Methods": "DELETE",
+			Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
 		},
 	});
 };

@@ -13,21 +13,28 @@ import { Link } from "react-router-dom";
 export default function OldLogin({ ...others }) {
 	const scriptedRef = useScriptRef();
 	const navigate = useNavigate();
+
 	const { setAuth } = useContext(AuthContext);
+	const [error, setError] = useState();
 
 	const userlogin = (email, password) => {
 		const crediential = { email, password };
+		console.log(crediential);
 		login(crediential).then((response) => {
-			if (!response.status === 200) throw new Error(response.status);
+			if (!response.status === 200){
+				console.log(response.status.message)
+				
+				throw new Error(response.status);
+			} 
 			else {
-				// setAuth(response.data.token);
-				//setAuth
-				
-				
-
+				setAuth(response.data.token);
+				localStorage.setItem('userEmail',response.data.userEmail);
+		
 				navigate("/");
-				console.log(setAuth);
 			}
+		},error=>{
+			setError(error.response.data.message);
+			console.log(error.response.data.message				)
 		});
 	};
 
@@ -85,6 +92,7 @@ export default function OldLogin({ ...others }) {
 									noValidate
 									onSubmit={handleSubmit}
 								>
+									<p >{error}</p>
 									<div className="flex flex-col gap-4 text-black items-center font-bold">
 										{" "}
 										User Login

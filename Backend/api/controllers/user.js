@@ -80,6 +80,7 @@ exports.user_login = (req, res) => {
 					return res.status(200).json({
 						message: "Authentication Successful",
 						token: token,
+						userEmail: user.email,
 					});
 				}
 				return res.status(401).json({
@@ -141,6 +142,7 @@ exports.update_user = (req, res) => {
 			} else {
 				let id = req.params.userID;
 				let data = {
+					_id: req.body._id,
 					name: req.body.name,
 					email: req.body.email,
 					birthDate: req.body.birthDate,
@@ -149,7 +151,7 @@ exports.update_user = (req, res) => {
 				};
 				User.findByIdAndUpdate(id, data, function (err) {
 					if (!err) {
-						res.status(404).json({
+						res.status(200).json({
 							message: "User Updated Sucessfully",
 						});
 					} else {
